@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MessageBroker.Client" Version="0.9.72" />
+    <PackageReference Include="MessageBroker.Core" Version="0.9.72" />
+  </ItemGroup>
+
 </Project>

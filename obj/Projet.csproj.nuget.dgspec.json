@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vince\\Documents\\Efrei Paris\\M1\\IntSysApp\\Projet\\Projet.csproj": {}
+    "C:\\Users\\vince\\Documents\\GitHub\\Pizzayolo\\Projet.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vince\\Documents\\Efrei Paris\\M1\\IntSysApp\\Projet\\Projet.csproj": {
+    "C:\\Users\\vince\\Documents\\GitHub\\Pizzayolo\\Projet.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vince\\Documents\\Efrei Paris\\M1\\IntSysApp\\Projet\\Projet.csproj",
+        "projectUniqueName": "C:\\Users\\vince\\Documents\\GitHub\\Pizzayolo\\Projet.csproj",
         "projectName": "Projet",
-        "projectPath": "C:\\Users\\vince\\Documents\\Efrei Paris\\M1\\IntSysApp\\Projet\\Projet.csproj",
+        "projectPath": "C:\\Users\\vince\\Documents\\GitHub\\Pizzayolo\\Projet.csproj",
         "packagesPath": "C:\\Users\\vince\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vince\\Documents\\Efrei Paris\\M1\\IntSysApp\\Projet\\obj\\",
+        "outputPath": "C:\\Users\\vince\\Documents\\GitHub\\Pizzayolo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\vince\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -37,6 +37,16 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "MessageBroker.Client": {
+              "target": "Package",
+              "version": "[0.9.72, )"
+            },
+            "MessageBroker.Core": {
+              "target": "Package",
+              "version": "[0.9.72, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -53,7 +63,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
