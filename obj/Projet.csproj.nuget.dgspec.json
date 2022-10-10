@@ -1,25 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vince\\Documents\\GitHub\\Pizzayolo\\Projet.csproj": {}
+    "C:\\Users\\logan\\github\\Kiasa-Web\\Pizzayolo\\Projet.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vince\\Documents\\GitHub\\Pizzayolo\\Projet.csproj": {
+    "C:\\Users\\logan\\github\\Kiasa-Web\\Pizzayolo\\Projet.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vince\\Documents\\GitHub\\Pizzayolo\\Projet.csproj",
+        "projectUniqueName": "C:\\Users\\logan\\github\\Kiasa-Web\\Pizzayolo\\Projet.csproj",
         "projectName": "Projet",
-        "projectPath": "C:\\Users\\vince\\Documents\\GitHub\\Pizzayolo\\Projet.csproj",
-        "packagesPath": "C:\\Users\\vince\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vince\\Documents\\GitHub\\Pizzayolo\\obj\\",
+        "projectPath": "C:\\Users\\logan\\github\\Kiasa-Web\\Pizzayolo\\Projet.csproj",
+        "packagesPath": "C:\\Users\\logan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\logan\\github\\Kiasa-Web\\Pizzayolo\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\vince\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\logan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
