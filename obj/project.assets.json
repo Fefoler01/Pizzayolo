@@ -4170,19 +4170,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/plugn/.nuget/packages/": {}
+    "C:\\Users\\vince\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/plugn/Documents/GitHub/Pizzayolo/Projet.csproj",
+      "projectUniqueName": "C:\\Users\\vince\\Documents\\GitHub\\Pizzayolo\\Projet.csproj",
       "projectName": "Projet",
-      "projectPath": "/Users/plugn/Documents/GitHub/Pizzayolo/Projet.csproj",
-      "packagesPath": "/Users/plugn/.nuget/packages/",
-      "outputPath": "/Users/plugn/Documents/GitHub/Pizzayolo/obj/",
+      "projectPath": "C:\\Users\\vince\\Documents\\GitHub\\Pizzayolo\\Projet.csproj",
+      "packagesPath": "C:\\Users\\vince\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\vince\\Documents\\GitHub\\Pizzayolo\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/plugn/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\vince\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -4231,7 +4231,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.401/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }
