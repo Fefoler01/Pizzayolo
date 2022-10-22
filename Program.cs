@@ -177,7 +177,7 @@ namespace Pizzayolo
                         order.Items = orderItems;
                         order.State = Order.Status.Delivery;
                         c.OrderGenerated = order;
-                        Console.WriteLine("\n" + c.firstName + " Are preparing the order number : " + order.Number +
+                        Console.WriteLine("\n" + c.firstName + " Are preparing the order number : " + order +
                         "\n" + c.firstName + " Send order to delivery man");
                         c.SendCommand();
                     });
