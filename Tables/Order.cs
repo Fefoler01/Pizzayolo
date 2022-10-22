@@ -1,5 +1,7 @@
 // Order { id, Date, Status, FinalState, calcSubTotal(), calcTax(), calcTotal(), calcNumberArticles()}
 
+using System;
+
 namespace Pizzayolo.Tables
 {
     public class Order

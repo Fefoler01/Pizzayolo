@@ -1,5 +1,7 @@
 // Kitchen { id, cookOrder(id)}
 
+using System;
+
 namespace Pizzayolo.Tables
 {
     public class Kitchen : Person

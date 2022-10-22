@@ -1,5 +1,7 @@
 // DeliveryMan { Id, Date, StatusDelivery, totalDelivery, receiveOrder(id), giveOrder(id), open(), close(), sendMessage(), receiveMessage()}
 
+using System;
+
 namespace Pizzayolo.Tables
 {
     public class DeliveryMan : Person

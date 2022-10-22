@@ -1,5 +1,7 @@
 // Clerk { id_clerk, totalOrder, disponibility, isDispo(id_clerk), takeOrder(id_client), updateOrder(id_order), validateOrder(facture,id_order,id_deliveryman), sendMessage(), receiveMessage()}
 
+using System;
+
 namespace Pizzayolo.Tables
 {
     public class Clerk : Person

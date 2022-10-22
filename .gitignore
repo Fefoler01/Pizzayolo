@@ -1,3 +1,5 @@
-obj\*
+obj/*
+bin/*
+.vs/*
 */.DS_Store
 .DS_Store
