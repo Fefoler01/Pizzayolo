@@ -1,46 +1,31 @@
-// Kitchen { id, cookOrder(id)}
+﻿// Kitchen takes the order from the clerk and prepares it, it represents a person and can't take multiple orders at the same time
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Pizzayolo.MessageBroker.Consumer;
+using Pizzayolo.MessageBroker.Producer;
 
 namespace Pizzayolo.Tables
 {
-    public class Kitchen : Person
+    // Kitchen is a singleton, it's not possible to instantiate it, but it's possible to inherit from it.
+    public sealed class Kitchen : Individual
     {
-        #region Fields
-        private uint _id;
-        #endregion
+        // Properties
+        public Order orderGenerated;
 
-        #region Properties
-        public uint Id { get => _id; set => _id = value; }
-        #endregion
+        // Constructors
+        public Kitchen(string firstName, string lastName) : base(firstName, lastName) { }
 
-        #region Constructors
-        public Kitchen()
-        {
-            Id = 0;
+        // Methods
+        public override bool SendCommand() {
+            return Publisher.Publish<Order>(orderGenerated, "kitchen-deliveryman");
         }
 
-        public Kitchen(uint id)
-        {
-            Id = id;
+        public override Order ReceiveCommand<Order>() {
+            return Receiver.Receive<Order>("clerk-kitchen");
         }
-        #endregion
-
-        #region Methods
-        public void CookOrder(uint id)
-        {
-            Console.WriteLine("Order " + id + " is being cooked");
-        }
-
-        public override bool SendMessage()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override T ReceiveMessage<T>()
-        {
-            throw new NotImplementedException();
-        }
-        #endregion
     }
 }

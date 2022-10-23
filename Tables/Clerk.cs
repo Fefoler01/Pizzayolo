@@ -1,76 +1,47 @@
-// Clerk { id_clerk, totalOrder, disponibility, isDispo(id_clerk), takeOrder(id_client), updateOrder(id_order), validateOrder(facture,id_order,id_deliveryman), sendMessage(), receiveMessage()}
+﻿// Clerk is the person who is responsible for the order, he can take multiple orders at the same time
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Threading;
+using Pizzayolo.Tables;
+using Pizzayolo.MessageBroker.Consumer;
+using Pizzayolo.MessageBroker.Producer;
+using System.Globalization;
 
 namespace Pizzayolo.Tables
 {
-    public class Clerk : Person
+    // class Clerk is a subclass of Individual and implements the interface IIndividual 
+    public sealed class Clerk : Individual
     {
-        #region Fields
-        private uint _id;
-        private uint _totalOrder;
-        private bool _disponibility;
-        #endregion
+        // Properties
+        public Order orderGenerated;
 
-        #region Properties
-        public uint Id { get => _id; set => _id = value; }
-        public uint TotalOrder { get => _totalOrder; set => _totalOrder = value; }
-        public bool Disponibility { get => _disponibility; set => _disponibility = value; }
-        #endregion
+        // Constructors
+        public Clerk(string firstName, string lastName) : base(firstName, lastName) { }
 
-        #region Constructors
-        public Clerk()
-        {
-            Id = 0;
-            TotalOrder = 0;
-            Disponibility = true;
+        // Methods
+        public Order CreateOrder(uint number, DateTime orderSchedule, string nameClient, string adressClient, string nameClerk, OrderItems order) {
+            orderGenerated = new Order(number, orderSchedule, nameClient, nameClerk, adressClient, order);
+            return orderGenerated;
         }
 
-        public Clerk(uint id, bool disponibility)
-        {
-            Id = id;
-            Disponibility = disponibility;
-        }
-        #endregion
-
-        #region Methods
-        public void TakeOrder(uint idClient)
-        {
-            if (Disponibility)
-            {
-                Console.WriteLine("Order " + idClient + " is being taken");
+        public bool VerifyFirstOrderClient(Client client) {
+            if(client.dateFirstOrder == DateTime.MinValue) {
+                client.dateFirstOrder = DateTime.Now;
+                return false;
             }
-            else
-            {
-                Console.WriteLine("Order " + idClient + " is not being taken");
-            }
+            return true;
         }
 
-        public void UpdateOrder(uint idOrder)
-        {
-            Console.WriteLine("Order " + idOrder + " is being updated");
+        public override bool SendCommand() {
+            return Publisher.Publish<Order>(orderGenerated,"clerk-kitchen");
         }
 
-        public void ValidateOrder(uint facture, uint idOrder, uint idDeliveryman)
-        {
-            Console.WriteLine("Order " + idOrder + " is being validated");
+        public override Client ReceiveCommand<Client>() {
+            return  Receiver.Receive<Client>("client-clerk");
         }
-
-        public override bool SendMessage()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override T ReceiveMessage<T>()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string ToString()
-        {
-            return "Id : " + Id
-                + "\nTotalOrder : " + TotalOrder;
-        }
-        #endregion
     }
 }

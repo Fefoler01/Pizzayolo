@@ -1,82 +1,31 @@
-// DeliveryMan { Id, Date, StatusDelivery, totalDelivery, receiveOrder(id), giveOrder(id), open(), close(), sendMessage(), receiveMessage()}
+﻿// DeliveryMan deliver the order to the customer, he can't take multiple orders at the same time
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Pizzayolo.MessageBroker.Consumer;
+using Pizzayolo.MessageBroker.Producer;
 
 namespace Pizzayolo.Tables
 {
-    public class DeliveryMan : Person
+    public sealed class DeliveryMan : Individual
     {
-        #region Enums
-        public enum StatusDelivery
-        {
-            InProgress,
-            Open,
-            Close
-        }
-        #endregion
 
-        #region Fields
-        private uint _id;
-        private DateTime _date;
-        private StatusDelivery _stateDelivery;
-        private uint _totalDelivery;
-        #endregion
+        // Properties
+        public Order order{ get; set; }
 
-        #region Properties
-        public uint Id { get => _id; set => _id = value; }
-        public DateTime Date { get => _date; set => _date = value; }
-        public StatusDelivery StateDelivery { get => _stateDelivery; set => _stateDelivery = value; }
-        public uint TotalDelivery { get => _totalDelivery; set => _totalDelivery = value; }
-        #endregion
+        // Constructors
+        public DeliveryMan(string firstName, string lastName) : base(firstName, lastName) { }
 
-        #region Constructors
-        public DeliveryMan()
-        {
-            Id = 0;
-            Date = DateTime.Now;
-            StateDelivery = StatusDelivery.Close;
-            TotalDelivery = 0;
+        // Methods
+        public override bool SendCommand() {
+            return Publisher.Publish<Order>(order, "deliveryman-client");
         }
 
-        public DeliveryMan(uint id, DateTime date, StatusDelivery stateDelivery, uint totalDelivery)
-        {
-            Id = id;
-            Date = date;
-            StateDelivery = stateDelivery;
-            TotalDelivery = totalDelivery;
+        public override Order ReceiveCommand<Order>() {
+            return Receiver.Receive<Order>("kitchen-deliveryman");
         }
-        #endregion
-
-        #region Methods
-        public void ReceiveOrder(uint id)
-        {
-            Console.WriteLine("Order " + id + " is being delivered");
-        }
-
-        public void GiveOrder(uint id)
-        {
-            Console.WriteLine("Order " + id + " is delivered");
-        }
-
-        public void Open()
-        {
-            StateDelivery = StatusDelivery.Open;
-        }
-
-        public void Close()
-        {
-            StateDelivery = StatusDelivery.Close;
-        }
-
-        public override bool SendMessage()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override T ReceiveMessage<T>()
-        {
-            throw new NotImplementedException();
-        }
-        #endregion
     }
 }
