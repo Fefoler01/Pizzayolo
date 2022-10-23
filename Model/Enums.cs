@@ -11,6 +11,7 @@ namespace Pizzayolo.Model
 
     public enum PizzaKind { Margarita, Hawaïan, FourSeasons, Regina }
     public enum PizzaSize { Small, Medium, Large }
-    public enum Snacks { Coca, Orangina, Sevenup }
+    public enum Snacks { Coca, Orangina, Sevenup, Fanta, Sprite, Pepsi, IceTea, IceCoffee, Water, Cookies, Chips, Nuts }
+    public enum OrderStatus { Preparation, Delivery, Delivered }
 
 }

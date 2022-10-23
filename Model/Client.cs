@@ -40,7 +40,7 @@ namespace Pizzayolo.Model
         // Methods
         public override string ToString() {
             return base.ToString()
-                + "\nAdress : " + address
+                + "\nAddress: " + address
                 + "\nPhone Number: " + phoneNumber
                 + "\nDate First Order: " + dateFirstOrder.ToString()
                 + "\nOrder: " + orderItems.ToString();

@@ -10,9 +10,6 @@ namespace Pizzayolo.Model
 {
     public class Order
     {
-        // Status
-        public enum Status { Preparation, Delivery, Delivered }
-
         // Properties
         public uint number { get; set; }
         public DateTime orderSchedule { get; set; }
@@ -20,7 +17,7 @@ namespace Pizzayolo.Model
 	    public string nameClient {get; set;}
         public string addressClient { get; set; }
         public OrderItems items { get; set; }
-        public Status state { get; set; }
+        public OrderStatus state { get; set; }
 
         // Constructors
         public Order() { }
@@ -31,7 +28,7 @@ namespace Pizzayolo.Model
             this.nameClient = nameClient;
             this.nameClerk = nameClerk;
             this.addressClient = addressClient;
-            state = Status.Preparation;
+            state = OrderStatus.Preparation;
         }
 
         public Order(uint number, DateTime orderSchedule, string nameClient, string nameClerk, string addressClient, OrderItems itemsOrder) : this(number, orderSchedule, nameClient, nameClerk, addressClient) {
