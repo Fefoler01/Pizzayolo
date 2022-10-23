@@ -36,65 +36,80 @@ namespace Pizzayolo.Terminal
             bool orderAgain = true;
             bool orderUnlimited = true;
             string choseNext;
+            bool invalid = true;
 
             while (chose)
             {
                 if (orderUnlimited)
                 {
-                    Console.WriteLine("\nChoose the number of your pizza :" +
-                        "\n 1. Margarita" +
-                        "\n 2. Hawaïan" +
-                        "\n 3. Four Seasons" +
-                        "\n 4. Regina");
-                    choice = Int32.Parse(Console.ReadLine());
+                    Console.WriteLine("\nSelect your pizza type :");
+                    foreach (PizzaKind pizzakind in PizzaKind.GetValues(typeof(PizzaKind))) {
+                        Console.WriteLine((int) pizzakind + 1 + ". " + pizzakind);
+                    }
                     PizzaKind kindPizza = new PizzaKind();
-                    switch (choice)
-                    {
-                        case 1:
-                            kindPizza = PizzaKind.Margarita;
-                            break;
+                    while (invalid) {
+                        choice = Int32.Parse(Console.ReadLine());
+                        switch (choice)
+                        {
+                            case 1:
+                                kindPizza = PizzaKind.Margarita;
+                                invalid = false;
+                                break;
 
-                        case 2:
-                            kindPizza = PizzaKind.Hawaïan;
-                            break;
+                            case 2:
+                                kindPizza = PizzaKind.Hawaïan;
+                                invalid = false;
+                                break;
 
-                        case 3:
-                            kindPizza = PizzaKind.FourSeasons;
-                            break;
+                            case 3:
+                                kindPizza = PizzaKind.FourSeasons;
+                                invalid = false;
+                                break;
 
-                        case 4:
-                            kindPizza = PizzaKind.Regina;
-                            break;
+                            case 4:
+                                kindPizza = PizzaKind.Regina;
+                                invalid = false;
+                                break;
 
-                        default:
-                            Console.WriteLine("\nRetry.");
-                            break;
+                            default:
+                                Console.WriteLine("\nRetry.");
+                                invalid = true;
+                                break;
+                        }
                     }
+                    invalid = true;
 
-                    Console.WriteLine("Choose the number of your size" +
-                        "\n 1. Small" +
-                        "\n 2. Medium" +
-                        "\n 3. Large");
-                    choice = Int32.Parse(Console.ReadLine());
+                    Console.WriteLine("\nSelect the size of your pizza :");
+                    foreach (PizzaSize pizzasize in PizzaSize.GetValues(typeof(PizzaSize))) {
+                        Console.WriteLine((int)pizzasize + 1 + ". " + pizzasize);
+                    }
                     PizzaSize sizePizza = new PizzaSize();
-                    switch (choice)
-                    {
-                        case 1:
-                            sizePizza = PizzaSize.Small;
-                            break;
+                    while (invalid) {
+                        choice = Int32.Parse(Console.ReadLine());
+                        switch (choice)
+                        {
+                            case 1:
+                                sizePizza = PizzaSize.Small;
+                                invalid = false;
+                                break;
 
-                        case 2:
-                            sizePizza = PizzaSize.Medium;
-                            break;
+                            case 2:
+                                sizePizza = PizzaSize.Medium;
+                                invalid = false;
+                                break;
 
-                        case 3:
-                            sizePizza = PizzaSize.Large;
-                            break;
+                            case 3:
+                                sizePizza = PizzaSize.Large;
+                                invalid = false;
+                                break;
 
-                        default:
-                            Console.WriteLine("\nRetry.");
-                            break;
+                            default:
+                                Console.WriteLine("\nRetry.");
+                                invalid = true;
+                                break;
+                        }
                     }
+                    invalid = true;
 
                     List<Pizza> PizzaList = new List<Pizza>();
 
@@ -104,119 +119,131 @@ namespace Pizzayolo.Terminal
 
                     while (stop)
                     {
-                        Console.WriteLine("\nChoose the number of your another pizza" +
-                        "\n 1. Margarita" +
-                        "\n 2. Hawaïan" +
-                        "\n 3. Four Seasons" +
-                        "\n 4. Regina" +
-                        "\nTo quit tap 0.");
-                        choice = Int32.Parse(Console.ReadLine());
-                        switch (choice)
+                        Console.WriteLine("\nSelect your pizza type :");
+                        foreach (PizzaKind pizzakind in PizzaKind.GetValues(typeof(PizzaKind)))
                         {
-                            case 0:
-                                stop = false;
-                                break;
-
-                            case 1:
-                                kindPizza = PizzaKind.Margarita;
-                                break;
-
-                            case 2:
-                                kindPizza = PizzaKind.Hawaïan;
-                                break;
-
-                            case 3:
-                                kindPizza = PizzaKind.FourSeasons;
-                                break;
-
-                            case 4:
-                                kindPizza = PizzaKind.Regina;
-                                break;
-
-                            default:
-                                Console.WriteLine("\nRetry.");
-                                break;
-
+                            Console.WriteLine((int)pizzakind + 1 + ". " + pizzakind);
                         }
-
-
-                        if (stop == true)
-                        {
-                            Console.WriteLine("Choose the number of your size" +
-                            "\n 1. Small" +
-                            "\n 2. Medium" +
-                            "\n 3. Large" +
-                            "\nTo quit tap 0.");
+                        Console.WriteLine("To quit tap 0.");
+                        while (invalid) {
                             choice = Int32.Parse(Console.ReadLine());
                             switch (choice)
                             {
                                 case 0:
                                     stop = false;
+                                    invalid = false;
                                     break;
 
                                 case 1:
-                                    sizePizza = PizzaSize.Small;
+                                    kindPizza = PizzaKind.Margarita;
+                                    invalid = false;
                                     break;
 
                                 case 2:
-                                    sizePizza = PizzaSize.Medium;
+                                    kindPizza = PizzaKind.Hawaïan;
+                                    invalid = false;
                                     break;
 
                                 case 3:
-                                    sizePizza = PizzaSize.Large;
+                                    kindPizza = PizzaKind.FourSeasons;
+                                    invalid = false;
+                                    break;
+
+                                case 4:
+                                    kindPizza = PizzaKind.Regina;
+                                    invalid = false;
                                     break;
 
                                 default:
                                     Console.WriteLine("\nRetry.");
+                                    invalid = true;
                                     break;
-
                             }
+                        }
+                        invalid = true;
+
+
+                        if (stop == true)
+                        {
+                            Console.WriteLine("\nSelect the size of your pizza :");
+                            foreach (PizzaSize pizzasize in PizzaSize.GetValues(typeof(PizzaSize)))
+                            {
+                                Console.WriteLine((int)pizzasize + 1 + ". " + pizzasize);
+                            }
+                            Console.WriteLine("To quit tap 0.");
+                            while (invalid) {
+                                choice = Int32.Parse(Console.ReadLine());
+                                switch (choice)
+                                {
+                                    case 0:
+                                        stop = false;
+                                        invalid = false;
+                                        break;
+
+                                    case 1:
+                                        sizePizza = PizzaSize.Small;
+                                        invalid = false;
+                                        break;
+
+                                    case 2:
+                                        sizePizza = PizzaSize.Medium;
+                                        invalid = false;
+                                        break;
+
+                                    case 3:
+                                        sizePizza = PizzaSize.Large;
+                                        invalid = false;
+                                        break;
+
+                                    default:
+                                        Console.WriteLine("\nRetry.");
+                                        invalid = true;
+                                        break;
+                                }
+                            }
+                            invalid = true;
                             if (stop == true)
                             {
                                 PizzaList.Add(new Pizza(sizePizza, kindPizza));
                             }
-
                         }
                     }
 
-                    List<Snacks> DrinksList = new List<Snacks>();
+                    List<Snack> SnackList = new List<Snack>();
 
                     stop = true;
 
                     Console.WriteLine("\n");
                     while (stop)
                     {
-                        Console.WriteLine("Choose your snack" +
-                        "\n 1. Coca" +
-                        "\n 2. Orangina" +
-                        "\n 3. Sevenup" +
-                        "\nTo quit tap 0.");
-                        choice = Int32.Parse(Console.ReadLine());
-                        switch (choice)
+                        Console.WriteLine("\nChoose your snack :");
+                        foreach (Snacks snacks in Snacks.GetValues(typeof(Snacks)))
                         {
-                            case 0:
-                                stop = false;
-                                break;
-
-                            case 1:
-                                DrinksList.Add(Snacks.Coca);
-                                break;
-
-                            case 2:
-                                DrinksList.Add(Snacks.Orangina);
-                                break;
-
-                            case 3:
-                                DrinksList.Add(Snacks.Sevenup);
-                                break;
-
-                            default:
-                                Console.WriteLine("\nRetry.");
-                                break;
+                            Console.WriteLine((int)snacks + 1 + ". " + snacks);
                         }
+                        Console.WriteLine("To quit tap 0.");
+                        while (invalid) {
+                            choice = Int32.Parse(Console.ReadLine());
+                            if (choice == 0)
+                            {
+                                stop = false;
+                                invalid = false;
+                            }
+                            else if (choice > 0 && choice <= Snacks.GetNames(typeof(Snacks)).Length)
+                            {
+                                SnackList.Add(new Snack((Snacks) choice));
+                                invalid = false;
+                            }
+                            else
+                            {
+                                Console.WriteLine("\nRetry.");
+                                invalid = true;
+                            }
+                        }
+                        invalid = true;
                     }
 
-                    client.orderItems = new OrderItems(PizzaList, DrinksList);
+                    client.orderItems = new OrderItems(PizzaList, SnackList);
                 }
 
 
@@ -267,8 +294,8 @@ namespace Pizzayolo.Terminal
                 while (orderAgain && orderUnlimited)
                 {
                     Console.WriteLine("\n-----------------------------------------------");
-                    Console.WriteLine("\nYour order is : " + client.orderItems);
-                    Console.WriteLine("\n-----------------------------------------------\n");
+                    Console.WriteLine("Your order is : " + client.orderItems);
+                    Console.WriteLine("-----------------------------------------------\n");
                     Console.WriteLine("Y for pass a new command; N for not; U for unlimited!");
                     choseNext = Console.ReadLine();
                     if (choseNext == "Y" || choseNext == "y")

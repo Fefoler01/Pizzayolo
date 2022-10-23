@@ -17,9 +17,11 @@ namespace Pizzayolo.Terminal
     {
         public static async Task ActivateClerkSide()
         {
-            Console.WriteLine("\nChoose your name:");
+            Console.WriteLine("=====\nClerk\n=====");
+
+            Console.WriteLine("Choose your name :");
             string name = Console.ReadLine();
-            Console.WriteLine("Choose your surname:");
+            Console.WriteLine("Choose your surname :");
             string surname = Console.ReadLine();
 
             Clerk clerk = new Clerk(name, surname);
@@ -28,7 +30,6 @@ namespace Pizzayolo.Terminal
 
             while (chose)
             {
-
                 Func<Clerk, uint, Task> ClerksReceive = (Clerk clerk, uint idOrder) =>
                 {
                     return Task.Run(() =>
@@ -77,9 +78,7 @@ namespace Pizzayolo.Terminal
 
                 await Task.WhenAll(ManageTwoClientClerk.ToArray());
 
-
             }
-
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Pizzayolo
             Console.WriteLine("To start, define who are you ?" +
                 "\n 1. Client" +
                 "\n 2. Clerk" +
-                "\n 3. Cooker" +
+                "\n 3. Kitchen" +
                 "\n 4. DeliveryMan" +
                 "\nTo quit tap 0.\n");
 
@@ -37,42 +37,36 @@ namespace Pizzayolo
                 switch (chose)
                 {
                     case "1":
-                        Console.WriteLine("\n");
                         Console.Title = "Client";
                         await ClientSide.ActivateClientSide();
                         break;
 
                     case "2":
-                        Console.WriteLine("\n");
                         Console.Title = "Clerk";
                         await ClerkSide.ActivateClerkSide();
                         break;
 
                     case "3":
-                        Console.WriteLine("\n");
-                        Console.Title = "Cooker";
+                        Console.Title = "Kitchen";
                         await KitchenSide.ActivateKitchenSide();
                         break;
 
                     case "4":
-                        Console.WriteLine("\n");
                         Console.Title = "DeliveryMan";
                         await DeliveryManSide.ActivateDeliveryManSide();
                         break;
 
                     case "0":
-                        Console.WriteLine("\nProgram stopped.\n");
+                        Console.WriteLine("Program stopped.\n");
                         stop = true;
                         break;
 
                     default:
-                        Console.WriteLine("\nRetry, BAD Input.\n");
+                        Console.WriteLine("Retry, BAD Input.\n");
                         break;
 
                 }
             }
-            
-            return; 
         }
     }
 }

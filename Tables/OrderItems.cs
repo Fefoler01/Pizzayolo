@@ -11,12 +11,11 @@ namespace Pizzayolo.Tables
     public sealed class OrderItems
     {
         // Properties
-        public static double snackPrice = 2.0;
         public List<Pizza> pizzas { get; set; }
-        public List<Snacks> snacks { get; set; }
+        public List<Snack> snacks { get; set; }
 
         // Constructor
-        public OrderItems(List<Pizza> pizzas, List<Snacks> snacks) {
+        public OrderItems(List<Pizza> pizzas, List<Snack> snacks) {
             this.pizzas = pizzas;
             this.snacks = snacks;
         }
@@ -26,7 +25,7 @@ namespace Pizzayolo.Tables
             double total = 0.0;
 
             pizzas.ForEach(pizza => total += pizza.price);
-            snacks.ForEach(snack => total += snackPrice);
+            snacks.ForEach(snack => total += snack.price);
             
             return total;
         }
@@ -38,8 +37,8 @@ namespace Pizzayolo.Tables
         public override string ToString() {
             string listPizzas = "", listSnacks = "";
 
-            pizzas.ForEach(e => listPizzas += e.ToString() + ' ');
-            snacks.ForEach(e => listSnacks += e.ToString() + ' ');
+            pizzas.ForEach(pizza => listPizzas += pizza.ToString() + ' ');
+            snacks.ForEach(snack => listSnacks += snack.ToString() + ' ');
 
             return listPizzas + "\n" + listSnacks;
         }

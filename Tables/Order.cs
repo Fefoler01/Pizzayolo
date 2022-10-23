@@ -35,7 +35,7 @@ namespace Pizzayolo.Tables
             items = itemsOrder;
         }
 
-        public Order(uint number, DateTime orderSchedule, string nameClient, string nameClerk, string addressClient, List<Pizza> pizzas, List<Snacks> snacks) : this(number, orderSchedule, nameClient, nameClerk, addressClient, new OrderItems(pizzas, snacks)) { }
+        public Order(uint number, DateTime orderSchedule, string nameClient, string nameClerk, string addressClient, List<Pizza> pizzas, List<Snack> snacks) : this(number, orderSchedule, nameClient, nameClerk, addressClient, new OrderItems(pizzas, snacks)) { }
 
         // Methods
         public string Invoice() {
