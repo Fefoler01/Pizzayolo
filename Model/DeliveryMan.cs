@@ -1,39 +1,31 @@
-﻿using Pizzayolo.MessageBroker.Consumer;
-using Pizzayolo.MessageBroker.Producer;
+﻿// DeliveryMan deliver the order to the customer, he can't take multiple orders at the same time
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Pizzayolo.MessageBroker.Consumer;
+using Pizzayolo.MessageBroker.Producer;
 
 namespace Pizzayolo.Model
 {
     public sealed class DeliveryMan : Individual
     {
 
-        #region Properties
-        public Order Order{ get; set; }
-        #endregion
+        // Properties
+        public Order order{ get; set; }
 
-        #region Constructors
-        public DeliveryMan(string firstName, string lastName ) : base(firstName,lastName )
-        {
-          
-           
-        }
-        #endregion
+        // Constructors
+        public DeliveryMan(string firstName, string lastName) : base(firstName, lastName) { }
 
-        #region Methods
-        public override bool SendCommand()
-        {
-            return Publisher.Publish<Order>(Order,"deliveryman-client");
+        // Methods
+        public override bool SendCommand() {
+            return Publisher.Publish<Order>(order, "deliveryman-client");
         }
 
-        public override Order ReceiveCommand<Order>()
-        {
-            return Receiver.Receive<Order>("cooker-deliveryman");
+        public override Order ReceiveCommand<Order>() {
+            return Receiver.Receive<Order>("kitchen-deliveryman");
         }
-        #endregion 
     }
 }

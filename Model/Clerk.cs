@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Clerk is the person who is responsible for the order, he can take multiple orders at the same time
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,37 +13,35 @@ using System.Globalization;
 
 namespace Pizzayolo.Model
 {
+    // class Clerk is a subclass of Individual and implements the interface IIndividual 
     public sealed class Clerk : Individual
     {
-        #region Properties
-        public Order OrderGenerated;
-        #endregion
+        // Properties
+        public Order orderGenerated;
 
-        #region Constructors
+        // Constructors
         public Clerk(string firstName, string lastName) : base(firstName, lastName) { }
-        #endregion
 
-        #region Methods
+        // Methods
         public Order CreateOrder(uint number, DateTime orderSchedule, string nameClient, string adressClient, string nameClerk, OrderItems order) {
-            OrderGenerated = new Order(number, orderSchedule, nameClient, nameClerk,adressClient,order);
-            return OrderGenerated;
+            orderGenerated = new Order(number, orderSchedule, nameClient, nameClerk, adressClient, order);
+            return orderGenerated;
         }
 
-        public bool VerifyFirstOrderClient(Client c) {
-            if(c.DateFirstOrder == DateTime.MinValue) {
-                c.DateFirstOrder = DateTime.Now;
+        public bool VerifyFirstOrderClient(Client client) {
+            if(client.DateFirstOrder == DateTime.MinValue) {
+                client.DateFirstOrder = DateTime.Now;
                 return false;
             }
             return true;
         }
 
+        public override bool SendCommand() {
+            return Publisher.Publish<Order>(orderGenerated,"clerk-kitchen");
+        }
+
         public override Client ReceiveCommand<Client>() {
             return  Receiver.Receive<Client>("client-clerk");
         }
-
-        public override bool SendCommand() {
-            return Publisher.Publish<Order>(OrderGenerated,"clerk-cooker");
-        }
-        #endregion
     }
 }

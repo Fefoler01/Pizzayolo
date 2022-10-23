@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Client is the person who is ordering the pizza (one or more) and some snacks (zero or more)
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,45 +9,41 @@ using System.Threading;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using Newtonsoft.Json;
-
-
 using Pizzayolo.MessageBroker.Producer;
 using Pizzayolo.MessageBroker.Consumer;
 
 namespace Pizzayolo.Model
 {
+    // class Client is a subclass of Individual and implements the interface IIndividual
     public sealed class Client : Individual
     {
-        #region Properties
-        public string Adress { get; set; }
-        public string PhoneNumber { get; set; }
-        public DateTime DateFirstOrder { get; set; }
-        public OrderItems OrderItems { get; set; }
-        #endregion
+        // Properties
+        public string address { get; set; }
+        public string phoneNumber { get; set; }
+        public DateTime dateFirstOrder { get; set; }
+        public OrderItems orderItems { get; set; }
 
-        #region Constructors
+        // Constructors
         public Client() { }
 
-        public Client(string firstName, string lastName, string adress, string phoneNumber) : base(firstName,lastName) {
-            Adress = adress;
-            PhoneNumber = phoneNumber;
+        public Client(string firstName, string lastName, string address, string phoneNumber) : base(firstName, lastName) {
+            this.address = address;
+            this.phoneNumber = phoneNumber;
         }
 
-        public Client(string firstName, string lastName, string adress, string phoneNumber, DateTime dateFirstOrder) : this(firstName, lastName, adress,  phoneNumber) {
-            DateFirstOrder = dateFirstOrder;
+        public Client(string firstName, string lastName, string address, string phoneNumber, DateTime dateFirstOrder) : this(firstName, lastName, address,  phoneNumber) {
+            this.dateFirstOrder = dateFirstOrder;
         }
 
-        public Client(Client other) : this(other.firstName, other.lastName, other.Adress, other.PhoneNumber, other.DateFirstOrder) { }
-        #endregion
+        public Client(Client other) : this(other.firstName, other.lastName, other.address, other.phoneNumber, other.dateFirstOrder) { }
 
-        #region Methods
+        // Methods
         public override string ToString() {
             return base.ToString()
-                + "\nAdress : " + Adress
-                + "\nPhone Number: " + PhoneNumber
-                + "\nDate First Order: " + DateFirstOrder.ToString()
-                + "\nOrder: " + OrderItems.ToString();
-                
+                + "\nAdress : " + address
+                + "\nPhone Number: " + phoneNumber
+                + "\nDate First Order: " + dateFirstOrder.ToString()
+                + "\nOrder: " + orderItems.ToString();
         }
 
         public override bool SendCommand() {
@@ -55,6 +53,5 @@ namespace Pizzayolo.Model
         public override Order ReceiveCommand<Order>() {
             return Receiver.Receive<Order>("deliveryman-client");
         }
-        #endregion
     }
 }

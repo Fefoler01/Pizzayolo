@@ -1,4 +1,6 @@
-﻿using System;
+﻿// OrderItems is a list of Item (pizzas and snacks).
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,24 +10,24 @@ namespace Pizzayolo.Model
 {
     public sealed class OrderItems
     {
-        #region Properties
-        public static double drinkPrice = 2.0;
+        // Properties
+        public static double snackPrice = 2.0;
         public List<Pizza> pizzas { get; set; }
-        public List<Drinks> drinks { get; set; }
-        #endregion
+        public List<Snacks> snacks { get; set; }
 
-        #region Constructor
-        public OrderItems(List<Pizza> pizzas, List<Drinks> drinks) {
+        // Constructor
+        public OrderItems(List<Pizza> pizzas, List<Snacks> snacks) {
             this.pizzas = pizzas;
-            this.drinks = drinks;
+            this.snacks = snacks;
         }
-        #endregion
 
-        #region Methods
+        // Methods
         public double totalPrice() {
             double total = 0.0;
-            pizzas.ForEach(p => total += p.price);
-            drinks.ForEach(d => total += drinkPrice);
+
+            pizzas.ForEach(pizza => total += pizza.price);
+            snacks.ForEach(snack => total += snackPrice);
+            
             return total;
         }
 
@@ -34,14 +36,12 @@ namespace Pizzayolo.Model
         }
 
         public override string ToString() {
-            string listPizzas = "", listDrinks = "";
+            string listPizzas = "", listSnacks = "";
 
             pizzas.ForEach(e => listPizzas += e.ToString() + ' ');
-            drinks.ForEach(e => listDrinks += e.ToString() + ' ');
+            snacks.ForEach(e => listSnacks += e.ToString() + ' ');
 
-            return listPizzas + "\n" + listDrinks;
+            return listPizzas + "\n" + listSnacks;
         }
-        #endregion
     }
-
 }

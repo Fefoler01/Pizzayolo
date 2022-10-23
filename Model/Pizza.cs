@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Pizza is already composed and can have different sizes.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +10,12 @@ namespace Pizzayolo.Model
 {
     public class Pizza
     {
-        #region Properties
+        // Properties
         public PizzaSize size { get ; set; }
         public PizzaKind kind { get; set; }
         public double price { get; set; }
-        #endregion
 
-        #region Constructor
+        // Constructor
         public Pizza(PizzaSize size, PizzaKind kind) {
             this.size = size;
             this.kind = kind;
@@ -41,6 +42,7 @@ namespace Pizzayolo.Model
                     this.price = 0;
                     break;
             }
+
             switch (size)
             {
                 case PizzaSize.Small:
@@ -60,12 +62,10 @@ namespace Pizzayolo.Model
                     break;
             }
         }
-        #endregion
 
-        #region Method
+        // Method
         public override string ToString() {
             return "Pizza(kind: " + kind.ToString() + ", size: " + size.ToString() + ", price: " + price.ToString() + "€)";
         }
-        #endregion
     }
 }

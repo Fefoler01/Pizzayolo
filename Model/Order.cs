@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Order is composed by OrderItems, which is a list of Item (pizzas and snacks). Client can make multiple orders at the same time.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,59 +10,50 @@ namespace Pizzayolo.Model
 {
     public class Order
     {
-        #region Status
-        public enum Status { Prepartion, Delivery, Delivered }
-        #endregion
+        // Status
+        public enum Status { Preparation, Delivery, Delivered }
 
-        #region Properties
-        public uint Number { get; set; }
-        public DateTime OrderSchedule { get; set; }
-        public string NameClerk { get; set; }
-	    public string NameClient {get; set;}
-        public string AdressClient { get; set; }
-        public OrderItems Items { get; set; }
-        public Status State { get; set; }
+        // Properties
+        public uint number { get; set; }
+        public DateTime orderSchedule { get; set; }
+        public string nameClerk { get; set; }
+	    public string nameClient {get; set;}
+        public string addressClient { get; set; }
+        public OrderItems items { get; set; }
+        public Status state { get; set; }
 
-        #endregion
-
-        #region Constructors
-
+        // Constructors
         public Order() { }
 
-        public Order(uint number, DateTime orderSchedule, string nameClient, string nameClerk, string adressClient) {
-            Number = number;
-            OrderSchedule = orderSchedule;
-            NameClient = nameClient;
-            NameClerk = nameClerk;
-            AdressClient = adressClient;
-            State = Status.Prepartion;
+        public Order(uint number, DateTime orderSchedule, string nameClient, string nameClerk, string addressClient) {
+            this.number = number;
+            this.orderSchedule = orderSchedule;
+            this.nameClient = nameClient;
+            this.nameClerk = nameClerk;
+            this.addressClient = addressClient;
+            state = Status.Preparation;
         }
 
-        public Order(uint number, DateTime orderSchedule, string nameClient, string nameClerk, string adressClient, OrderItems itemsOrder) : this(number, orderSchedule, nameClient, nameClerk, adressClient) {
-            Items = itemsOrder;
+        public Order(uint number, DateTime orderSchedule, string nameClient, string nameClerk, string addressClient, OrderItems itemsOrder) : this(number, orderSchedule, nameClient, nameClerk, addressClient) {
+            items = itemsOrder;
         }
 
-        public Order(uint number, DateTime orderSchedule, string nameClient, string nameClerk, string adressClient, List<Pizza> pizzas, List<Drinks> drinks) : this(number, orderSchedule,nameClient,nameClerk,adressClient,new OrderItems(pizzas,drinks)) { }
-        #endregion
+        public Order(uint number, DateTime orderSchedule, string nameClient, string nameClerk, string addressClient, List<Pizza> pizzas, List<Snacks> snacks) : this(number, orderSchedule, nameClient, nameClerk, addressClient, new OrderItems(pizzas, snacks)) { }
 
-        #region Methods
-
-        public string Invoice()
-        {
-            return Items.Invoice();
+        // Methods
+        public string Invoice() {
+            return items.Invoice();
         }
 
-        public override string ToString()
-        {
-            return "Order Number : " + Number.ToString()
-                + "\nSchedule Order : " + OrderSchedule.ToString()
-                + "\nName of client : " + NameClient
-                + "\nAdress of client : " + AdressClient
-                + "\nName of clerk : " + NameClerk
-                + "\nItems : " + (Items != default(OrderItems) ? Items.ToString() : "")
+        public override string ToString() {
+            return "Order Number : " + number.ToString()
+                + "\nSchedule Order : " + orderSchedule.ToString()
+                + "\nName of client : " + nameClient
+                + "\nAdress of client : " + addressClient
+                + "\nName of clerk : " + nameClerk
+                + "\nItems : " + (items != default(OrderItems) ? items.ToString() : "")
                 + "\n" + Invoice() + "€"
-                + "\nState : " + State.ToString();
+                + "\nState : " + state.ToString();
         }
-        #endregion
     }
 }
