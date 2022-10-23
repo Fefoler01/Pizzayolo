@@ -114,6 +114,8 @@ namespace Pizzayolo
 
                 }
 
+
+
                 if (stop == true)
                 {
                     Console.WriteLine("Choose your size");
@@ -204,7 +206,29 @@ namespace Pizzayolo
                 };
 
                 await Task.WhenAll(tasks.ToArray());
-                
+
+                Func<int, Task> ReceiveOrder = (int timeToLeave) =>
+                {
+                    return Task.Run(() =>
+                    {
+                        Thread.Sleep(timeToLeave);
+                        Order orderReceived = Receiver.Receive<Order>("deliveryman-client");
+                        Console.WriteLine(orderReceived);
+                    });
+                };
+
+                var OrderReceives = new List<Task>()
+                {
+                    ReceiveOrder(0),
+                    ReceiveOrder(0),
+                    ReceiveOrder(0),
+                    ReceiveOrder(0)
+                };
+
+                Task.WhenAll(OrderReceives.ToArray());
+
+
+
                 while (test && test2)
                 {
                     Console.WriteLine(client);
@@ -389,35 +413,7 @@ namespace Pizzayolo
                 
             }
         }
-        
-        static async Task  ConsumeOrdersDelivered()
-        {
-            bool chose = true;
-
-            while (chose)
-            {
-                Func<int, Task> ReceiveOrder = (int timeToLeave) =>
-                {
-                    return Task.Run(() =>
-                    {
-                        Thread.Sleep(timeToLeave);
-                        Order orderReceived = Receiver.Receive<Order>("deliveryman-client");
-                        Console.WriteLine(orderReceived);
-                    });
-                };
-
-                var OrderReceives = new List<Task>()
-                {
-                    ReceiveOrder(0),
-                    ReceiveOrder(0),
-                    ReceiveOrder(0),
-                    ReceiveOrder(0)
-                };
-
-                await Task.WhenAll(OrderReceives.ToArray());
-                
-            }
-        }
+       
         
         static async Task Main(string[] args)
         {
@@ -443,11 +439,7 @@ namespace Pizzayolo
                     await DeliveryManSide();
                     break;
 
-                case 5:
-                    await ConsumeOrdersDelivered();
-                    break;
-
-                case 6:
+                case 0:
                     Console.WriteLine("\nProgram stopped.");
                     stop = true;
                     break;

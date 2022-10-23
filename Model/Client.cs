@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 
 
 using Pizzayolo.MessageBroker.Producer;
+using Pizzayolo.MessageBroker.Consumer;
 
 namespace Pizzayolo.Model
 {
@@ -51,8 +52,8 @@ namespace Pizzayolo.Model
             return Publisher.Publish<Client>(this, "client-clerk"); 
         }
 
-        public override T ReceiveCommand<T>() {
-            throw new NotImplementedException();
+        public override Order ReceiveCommand<Order>() {
+            return Receiver.Receive<Order>("deliveryman-client");
         }
         #endregion
     }
