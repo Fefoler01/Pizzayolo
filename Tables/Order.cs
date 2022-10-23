@@ -28,7 +28,7 @@ namespace Pizzayolo.Tables
             this.nameClient = nameClient;
             this.nameClerk = nameClerk;
             this.addressClient = addressClient;
-            state = OrderStatus.Preparation;
+            state = OrderStatus.Preparing;
         }
 
         public Order(uint number, DateTime orderSchedule, string nameClient, string nameClerk, string addressClient, OrderItems itemsOrder) : this(number, orderSchedule, nameClient, nameClerk, addressClient) {
@@ -43,14 +43,16 @@ namespace Pizzayolo.Tables
         }
 
         public override string ToString() {
-            return "Order Number : " + number.ToString()
+            return "\n-----------------------------------------------\n"
+                + "Order Number : " + number.ToString()
                 + "\nSchedule Order : " + orderSchedule.ToString()
                 + "\nName of client : " + nameClient
                 + "\nAdress of client : " + addressClient
                 + "\nName of clerk : " + nameClerk
                 + "\nItems : " + (items != default(OrderItems) ? items.ToString() : "")
-                + "\n" + Invoice() + "€"
-                + "\nState : " + state.ToString();
+                + "\n" + Invoice()
+                + "\nState : " + state.ToString()
+                + "\n-----------------------------------------------\n";
         }
     }
 }

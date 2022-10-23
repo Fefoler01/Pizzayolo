@@ -22,7 +22,7 @@ namespace Pizzayolo.Tables
 
         // Method
         public override string ToString() {
-            return "Pizza(kind: " + kind.ToString() + ", price: " + price.ToString() + "€)";
+            return "Snack(kind: " + kind.ToString() + ", price: " + price.ToString() + "€)";
         }
     }
 }

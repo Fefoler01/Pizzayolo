@@ -17,6 +17,7 @@ namespace Pizzayolo.Terminal
     {
         public static async Task ActivateDeliveryManSide()
         {
+            Console.WriteLine("\n=====\nDeliveryMan\n=====");
             Console.WriteLine("\nChoose your name:");
             string name = Console.ReadLine();
             Console.WriteLine("Choose your surname:");
@@ -31,17 +32,18 @@ namespace Pizzayolo.Terminal
 
                 Func<DeliveryMan, int, Task> Deliver = (DeliveryMan d, int timeToDeliver) =>
                 {
-                    return Task.Run(() =>
+                    return Task.Run(async () =>
                     {
-                        Thread.Sleep(timeToDeliver);
+                        await Task.Delay(timeToDeliver);
                         Order orderReceived = d.ReceiveCommand<Order>();
-                        Console.WriteLine(d.firstName +
-                            " \nReceived the following Command : \n"
+                        orderReceived.state = OrderStatus.Delivery;
+                        Console.WriteLine("\nThe DeliveryMan " + d.firstName + " " + d.lastName + " is about to dispatch the order :"
                             + orderReceived
                             + "\nFinish Delivering\n"
                         );
                         d.order = orderReceived;
                         d.order.state = OrderStatus.Delivered;
+                        await Task.Delay(timeToDeliver);
                         d.SendCommand();
 
                     });
@@ -51,6 +53,8 @@ namespace Pizzayolo.Terminal
                 {
                     Deliver(d,5000),
                 };
+
+                Thread.Sleep(5000);
 
                 await Task.WhenAll(Delivers.ToArray());
 

@@ -17,7 +17,7 @@ namespace Pizzayolo.Terminal
     {
         public static async Task ActivateClientSide()
         {
-            Console.WriteLine("======\nClient\n======");
+            Console.WriteLine("\n======\nClient\n======");
 
             Console.WriteLine("Choose your name :");
             string name = Console.ReadLine();
@@ -231,7 +231,7 @@ namespace Pizzayolo.Terminal
                             }
                             else if (choice > 0 && choice <= Snacks.GetNames(typeof(Snacks)).Length)
                             {
-                                SnackList.Add(new Snack((Snacks) choice));
+                                SnackList.Add(new Snack((Snacks) choice-1));
                                 invalid = false;
                             }
                             else
@@ -267,15 +267,13 @@ namespace Pizzayolo.Terminal
 
                 await Task.WhenAll(tasks.ToArray());
 
-                Func<int, Task> ReceiveOrder = (int timeToLeave) =>
+                Func<int, Task> ReceiveOrder = (int delayDelivery) =>
                 {
-                    return Task.Run(() =>
+                    return Task.Run(async () =>
                     {
-                        Thread.Sleep(timeToLeave);
+                        await Task.Delay(delayDelivery);
                         Order orderReceived = Receiver.Receive<Order>("deliveryman-client");
-                        Console.WriteLine("\n-----------------------------------------------");
-                        Console.WriteLine(orderReceived);
-                        Console.WriteLine("\n-----------------------------------------------\n");
+                        Console.WriteLine("\nOrder received! Enjoy your meal, " + client.firstName + " " + client.lastName + "! " + orderReceived);
                     });
                 };
 
@@ -308,6 +306,7 @@ namespace Pizzayolo.Terminal
                         Console.WriteLine("Quit.");
                         orderAgain = false;
                         chose = false;
+                        return;
                     }
                     else if (choseNext == "U" || choseNext == "u")
                     {

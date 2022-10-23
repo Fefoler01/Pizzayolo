@@ -53,5 +53,13 @@ namespace Pizzayolo.Tables
         public override Order ReceiveCommand<Order>() {
             return Receiver.Receive<Order>("deliveryman-client");
         }
+
+        public override T ReceiveSupervision<T>() {
+            throw new NotImplementedException();
+        }
+
+        public override bool SendSupervision() {
+            throw new NotImplementedException();
+        }
     }
 }

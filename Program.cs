@@ -26,7 +26,7 @@ namespace Pizzayolo
                 "\n 2. Clerk" +
                 "\n 3. Kitchen" +
                 "\n 4. DeliveryMan" +
-                "\nTo quit tap 0.\n");
+                "\nTo quit tap 0.");
 
             bool stop = false;
 

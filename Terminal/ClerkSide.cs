@@ -17,7 +17,7 @@ namespace Pizzayolo.Terminal
     {
         public static async Task ActivateClerkSide()
         {
-            Console.WriteLine("=====\nClerk\n=====");
+            Console.WriteLine("\n=====\nClerk\n=====");
 
             Console.WriteLine("Choose your name :");
             string name = Console.ReadLine();
@@ -32,27 +32,33 @@ namespace Pizzayolo.Terminal
             {
                 Func<Clerk, uint, Task> ClerksReceive = (Clerk clerk, uint idOrder) =>
                 {
-                    return Task.Run(() =>
+                    return Task.Run(async () =>
                     {
                         Client clientReceived = clerk.ReceiveCommand<Client>();
 
+                        await Task.Delay(0);
+
                         Console.WriteLine(
-                            "\nThe clerk : " + clerk.firstName + " Receive the folowing Client" + clientReceived.firstName +
-                            "\nVerify first order of client " + clientReceived.dateFirstOrder + " : \n" +
+                            "\nThe clerk : " + clerk.firstName + " " + clerk.lastName + " Receive the folowing Client: " + clientReceived.firstName + " " + clientReceived.lastName + 
+                            "\nVerify first order of client ... \n" +
                             (!clerk.VerifyFirstOrderClient(clientReceived) ?
-                            "\nNo order yet, setting first order of client " + clientReceived.dateFirstOrder.ToString("HH:mm:ss.ff") + "...\n" :
-                            "\n It'a already a client\n")
+                            "\nNo order yet, setting first order of client " + clientReceived.dateFirstOrder.ToString("dd-MM-yyyy HH:mm:ss") + "...\n" :
+                            "\n It's already a client since " + clientReceived.dateFirstOrder.ToString("dd-MM-yyyy HH:mm:ss") + "\n")
                         );
 
 
                         clerk.CreateOrder(
                             idOrder,
-                            clientReceived.dateFirstOrder,
+                            DateTime.Now,
                             clientReceived.firstName,
                             clientReceived.address,
                             clerk.firstName,
                             clientReceived.orderItems
                         );
+
+                        Console.WriteLine("\nThe Clerk " + clerk.firstName + " " + clerk.lastName + " is preparing the order : " + clerk.processedOrder);
+
+                        await Task.Delay(0);
 
                         clerk.SendCommand();
                     });

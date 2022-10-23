@@ -31,7 +31,7 @@ namespace Pizzayolo.Tables
         }
 
         public string Invoice() {
-            return "Price : " + totalPrice() + "\n" + ToString();
+            return "TOTAL to pay: " + totalPrice() + "€\n";
         }
 
         public override string ToString() {

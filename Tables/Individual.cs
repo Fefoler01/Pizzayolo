@@ -1,14 +1,13 @@
-﻿// Individual defines the common properties and methods for all the individuals in the system. It implements the IIndividual interface.
-
-using System;
+// Individual defines the common properties and methods for all the individuals in the system. It implements the IIndividual interface.
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using Newtonsoft.Json;
+using System.Threading;
 
 namespace Pizzayolo.Tables
 {
@@ -28,12 +27,14 @@ namespace Pizzayolo.Tables
         }
 
         // Methods
-        public override string ToString() {
+        public override string ToString()
+        {
             return "Individual(firstName: " + firstName + ", lastName: " + lastName + ")";
         }
-
         public abstract bool SendCommand();
-
         public abstract T ReceiveCommand<T>();
+
+        public abstract bool SendSupervision();
+        public abstract T ReceiveSupervision<T>();
     }
 }

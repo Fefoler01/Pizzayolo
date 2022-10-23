@@ -17,39 +17,43 @@ namespace Pizzayolo.Terminal
     {
         public static async Task ActivateKitchenSide()
         {
+            Console.WriteLine("\n=====\nKitchen\n=====");
             Console.WriteLine("\nChoose your name:");
             string name = Console.ReadLine();
             Console.WriteLine("Choose your surname:");
             string surname = Console.ReadLine();
 
-            Kitchen cooker = new Kitchen(name, surname);
+            Kitchen kitchen = new Kitchen(name, surname);
 
             bool chose = true;
 
             while (chose)
             {
 
-                Func<Kitchen, Order, int, Task> CookingPizza = (Kitchen c, Order order, int timeCooking) =>
+                Func<Kitchen, Order, int, Task> CookingPizza = (Kitchen k, Order order, int timeCooking) =>
                 {
-                    return Task.Run(() =>
+                    return Task.Run(async () =>
                     {
-                        Thread.Sleep(timeCooking);
-                        order.state = OrderStatus.Delivery;
-                        c.orderGenerated = order;
-                        Console.WriteLine("\n" + c.firstName + " Are preparing the order number : " + order.number +
-                        "\n" + c.firstName + " Send order to delivery man\n");
-                        c.SendCommand();
+                        await Task.Delay(timeCooking);
+                        order.state = OrderStatus.Cooking;
+                        k.orderGenerated = order;
+                        Console.WriteLine("\nThe Kitchen " + k.firstName + " " + k.lastName + " is cooking the order : " + order +
+                        "\nThe Kitchen " + k.firstName + " " + k.lastName + " is sending the order to the delivery man\n");
+                        await Task.Delay(timeCooking);
+                        k.SendCommand();
                     });
                 };
 
                 var OrdersPreparing = new List<Task>()
                 {
                     CookingPizza(
-                        cooker,
-                        cooker.ReceiveCommand<Order>(),
+                        kitchen,
+                        kitchen.ReceiveCommand<Order>(),
                         4000
                     )
                 };
+
+                Thread.Sleep(5000);
 
                 await Task.WhenAll(OrdersPreparing.ToArray());
 
