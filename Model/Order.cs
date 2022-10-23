@@ -20,6 +20,7 @@ namespace Pizzayolo.Model
         public string AdressClient { get; set; }
         public OrderItems Items { get; set; }
         public Status State { get; set; }
+
         #endregion
 
         #region Constructors
@@ -57,6 +58,7 @@ namespace Pizzayolo.Model
                 + "\nAdress of client : " + AdressClient
                 + "\nName of clerk : " + NameClerk
                 + "\nItems : " + (Items != default(OrderItems) ? Items.ToString() : "")
+                + "\n" + Invoice() + "€"
                 + "\nState : " + State.ToString();
         }
         #endregion

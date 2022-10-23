@@ -7,16 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ClerkSide\**" />
+    <Compile Remove="CookerSide\**" />
+    <Compile Remove="DeliveryManSide\**" />
+    <EmbeddedResource Remove="ClerkSide\**" />
+    <EmbeddedResource Remove="CookerSide\**" />
+    <EmbeddedResource Remove="DeliveryManSide\**" />
+    <None Remove="ClerkSide\**" />
+    <None Remove="CookerSide\**" />
+    <None Remove="DeliveryManSide\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Apache.NMS" Version="2.0.0" />
     <PackageReference Include="Apache.NMS.ActiveMQ" Version="2.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="RabbitMQ.Client" Version="6.4.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ClerkSide\" />
-    <Folder Include="CookerSide\" />
-    <Folder Include="DeliveryManSide\" />
   </ItemGroup>
 
 </Project>

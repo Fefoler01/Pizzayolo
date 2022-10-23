@@ -19,6 +19,7 @@ namespace Pizzayolo.Model
         public string Adress { get; set; }
         public string PhoneNumber { get; set; }
         public DateTime DateFirstOrder { get; set; }
+        public OrderItems OrderItems { get; set; }
         #endregion
 
         #region Constructors
@@ -40,13 +41,14 @@ namespace Pizzayolo.Model
         public override string ToString() {
             return base.ToString()
                 + "\nAdress : " + Adress
-                + "\nPhone Number" + PhoneNumber
-                + "\nDate First Order" + DateFirstOrder.ToString();
+                + "\nPhone Number: " + PhoneNumber
+                + "\nDate First Order: " + DateFirstOrder.ToString()
+                + "\nOrder: " + OrderItems.ToString();
                 
         }
 
         public override bool SendCommand() {
-              return Publisher.Publish<Client>(this, "client-clerk"); 
+            return Publisher.Publish<Client>(this, "client-clerk"); 
         }
 
         public override T ReceiveCommand<T>() {

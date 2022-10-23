@@ -15,10 +15,50 @@ namespace Pizzayolo.Model
         #endregion
 
         #region Constructor
-        public Pizza(PizzaSize size, PizzaKind kind, double price) {
+        public Pizza(PizzaSize size, PizzaKind kind) {
             this.size = size;
             this.kind = kind;
-            this.price = price;
+            
+            switch (kind)
+            {
+                case PizzaKind.Margarita:
+                    this.price = 10;
+                    break;
+
+                case PizzaKind.Hawaïan:
+                    this.price = 12;
+                    break;
+
+                case PizzaKind.Regina:
+                    this.price = 17;
+                    break;
+
+                case PizzaKind.FourSeasons:
+                    this.price = 15;
+                    break;
+
+                default:
+                    this.price = 0;
+                    break;
+            }
+            switch (size)
+            {
+                case PizzaSize.Small:
+                    this.price = this.price + 0;
+                    break;
+
+                case PizzaSize.Medium:
+                    this.price = this.price + 3;
+                    break;
+
+                case PizzaSize.Large:
+                    this.price = this.price + 5;
+                    break;
+
+                default:
+                    this.price = 0;
+                    break;
+            }
         }
         #endregion
 

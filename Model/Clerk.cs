@@ -22,8 +22,8 @@ namespace Pizzayolo.Model
         #endregion
 
         #region Methods
-        public Order CreateOrder(uint number, DateTime orderSchedule, string nameClient, string adressClient, string nameClerk) {
-            OrderGenerated = new Order(number, orderSchedule, nameClient, nameClerk,adressClient);
+        public Order CreateOrder(uint number, DateTime orderSchedule, string nameClient, string adressClient, string nameClerk, OrderItems order) {
+            OrderGenerated = new Order(number, orderSchedule, nameClient, nameClerk,adressClient,order);
             return OrderGenerated;
         }
 

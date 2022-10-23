@@ -29,6 +29,158 @@ namespace Pizzayolo
 
             Client client = new Client(name, surname, address, phonenumber);
 
+            Console.WriteLine("Choose your pizza");
+            int choice = Int32.Parse(Console.ReadLine());
+            PizzaKind kindPizza = new PizzaKind();
+            switch (choice)
+            {
+                case 1:
+                    kindPizza = PizzaKind.Margarita;
+                    break;
+
+                case 2:
+                    kindPizza = PizzaKind.Hawaïan;
+                    break;
+
+                case 3:
+                    kindPizza = PizzaKind.FourSeasons;
+                    break;
+
+                case 4:
+                    kindPizza = PizzaKind.Regina;
+                    break;
+
+                default:
+                    Console.WriteLine("\nRetry.");
+                    break;
+            }
+
+            Console.WriteLine("Choose your size");
+            choice = Int32.Parse(Console.ReadLine());
+            PizzaSize sizePizza = new PizzaSize();
+            switch (choice)
+            {
+                case 1:
+                    sizePizza = PizzaSize.Small;
+                    break;
+
+                case 2:
+                    sizePizza = PizzaSize.Medium;
+                    break;
+
+                case 3:
+                    sizePizza = PizzaSize.Large;
+                    break;
+
+                default:
+                    Console.WriteLine("\nRetry.");
+                    break;
+            }
+
+            List<Pizza> PizzaList = new List<Pizza>();
+
+            PizzaList.Add(new Pizza(sizePizza, kindPizza));
+
+            bool stop = true;
+            while (stop)
+            {
+                Console.WriteLine("Choose another pizza");
+                choice = Int32.Parse(Console.ReadLine());
+                switch (choice)
+                {
+                    case 0:
+                        stop = false;
+                        break;
+
+                    case 1:
+                        kindPizza = PizzaKind.Margarita;
+                        break;
+
+                    case 2:
+                        kindPizza = PizzaKind.Hawaïan;
+                        break;
+
+                    case 3:
+                        kindPizza = PizzaKind.FourSeasons;
+                        break;
+
+                    case 4:
+                        kindPizza = PizzaKind.Regina;
+                        break;
+
+                    default:
+                        Console.WriteLine("\nRetry.");
+                        break;
+
+                }
+
+                if (stop == true)
+                {
+                    Console.WriteLine("Choose your size");
+                    choice = Int32.Parse(Console.ReadLine());
+                    switch (choice)
+                    {
+                        case 0:
+                            stop = false;
+                            break;
+
+                        case 1:
+                            sizePizza = PizzaSize.Small;
+                            break;
+
+                        case 2:
+                            sizePizza = PizzaSize.Medium;
+                            break;
+
+                        case 3:
+                            sizePizza = PizzaSize.Large;
+                            break;
+
+                        default:
+                            Console.WriteLine("\nRetry.");
+                            break;
+
+                    }
+                    if (stop == true)
+                    {
+                        PizzaList.Add(new Pizza(sizePizza, kindPizza));
+                    }
+
+                }
+            }
+            stop = true;
+            List<Drinks> DrinksList = new List<Drinks>();
+
+            while (stop)
+            {
+                Console.WriteLine("Choose your snack");
+                choice = Int32.Parse(Console.ReadLine());
+                switch (choice)
+                {
+                    case 0:
+                        stop = false;
+                        break;
+
+                    case 1:
+                        DrinksList.Add(Drinks.Coca);
+                        break;
+
+                    case 2:
+                        DrinksList.Add(Drinks.Orangina);
+                        break;
+
+                    case 3:
+                        DrinksList.Add(Drinks.Sevenup);
+                        break;
+
+                    default:
+                        Console.WriteLine("\nRetry.");
+                        break;
+                }
+            }
+
+            client.OrderItems = new OrderItems(PizzaList,DrinksList);
+
             bool chose = true;
             bool test = true;
             bool test2 = true;
@@ -55,6 +207,7 @@ namespace Pizzayolo
                 
                 while (test && test2)
                 {
+                    Console.WriteLine(client);
                     Console.WriteLine("Y for pass a new command; N for not; U for unlimited!!!!!!!!!!!!!!!!!");
                     chose2 = Console.ReadLine();
                     if (chose2 == "Y" || chose2 == "y")
@@ -92,8 +245,6 @@ namespace Pizzayolo
             Clerk clerk = new Clerk(name, surname);
 
             bool chose = true;
-            bool test = true;
-            string chose2;
 
             while (chose)
             {
@@ -108,8 +259,8 @@ namespace Pizzayolo
 
                         Console.WriteLine(
                             "\nThe clerk : " + clerk.firstName + " Receive the folowing Client : \n" +
-                            "\n" + clientReceived + "\n" +
-                            "\nVerify first order of client " + clientReceived.firstName + " : \n" +
+                            "\n" + clientReceived.firstName + "\n" +
+                            "\nVerify first order of client " + clientReceived.DateFirstOrder + " : \n" +
                             (!clerk.VerifyFirstOrderClient(clientReceived) ?
                             "\nNo order yet, setting first order of client " + clientReceived.DateFirstOrder.ToString("HH:mm:ss.ff") + "...\n" :
                             "\n It'a already a client\n")
@@ -121,7 +272,8 @@ namespace Pizzayolo
                             clientReceived.DateFirstOrder,
                             clientReceived.firstName,
                             clientReceived.Adress,
-                            clerk.firstName
+                            clerk.firstName,
+                            clientReceived.OrderItems
                         );
 
                         clerk.SendCommand();
@@ -163,18 +315,15 @@ namespace Pizzayolo
             Cooker cooker = new Cooker(name, surname);
 
             bool chose = true;
-            bool test = true;
-            string chose2;
 
             while (chose)
             {
 
-                Func<Cooker, OrderItems, Order, int, Task> CookingPizza = (Cooker c, OrderItems orderItems, Order order, int timeCooking) =>
+                Func<Cooker, Order, int, Task> CookingPizza = (Cooker c, Order order, int timeCooking) =>
                 {
                     return Task.Run(() =>
                     {
                         Thread.Sleep(timeCooking);
-                        order.Items = orderItems;
                         order.State = Order.Status.Delivery;
                         c.OrderGenerated = order;
                         Console.WriteLine("\n" + c.firstName + " Are preparing the order number : " + order +
@@ -187,17 +336,6 @@ namespace Pizzayolo
                 {
                     CookingPizza(
                         cooker,
-                        new OrderItems(
-                            new List<Pizza> (){
-                                new Pizza(PizzaSize.Large, PizzaKind.Hawaïan, 150),
-                                new Pizza(PizzaSize.Medium, PizzaKind.FourSeasons, 250)
-                            },
-                            new List<Drinks>()
-                            {
-                                Drinks.Coca,
-                                Drinks.Orangina
-                            }
-                        ),
                         cooker.ReceiveCommand<Order>(),
                         4000
                     )
@@ -219,8 +357,6 @@ namespace Pizzayolo
             DeliveryMan d = new DeliveryMan(name, surname);
 
             bool chose = true;
-            bool test = true;
-            string chose2;
 
             while (chose)
             {
@@ -257,8 +393,6 @@ namespace Pizzayolo
         static async Task  ConsumeOrdersDelivered()
         {
             bool chose = true;
-            bool test = true;
-            string chose2;
 
             while (chose)
             {
@@ -325,6 +459,5 @@ namespace Pizzayolo
             }
             if (stop == true) { return; } 
         }
-
     }
 }
