@@ -15,6 +15,8 @@ namespace Pizzayolo.Tables
         public List<Snack> snacks { get; set; }
 
         // Constructor
+        public OrderItems() { }
+
         public OrderItems(List<Pizza> pizzas, List<Snack> snacks) {
             this.pizzas = pizzas;
             this.snacks = snacks;

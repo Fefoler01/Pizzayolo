@@ -22,6 +22,8 @@ namespace Pizzayolo.Tables
         public List<Client> clients;
 
         // Constructors
+        public Clerk() { }
+
         public Clerk(string firstName, string lastName) : base(firstName, lastName) {
             clients = new List<Client>();
         }

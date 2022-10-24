@@ -17,6 +17,8 @@ namespace Pizzayolo.Tables
         public Order orderGenerated;
 
         // Constructors
+        public Kitchen() { }
+
         public Kitchen(string firstName, string lastName) : base(firstName, lastName) { }
 
         // Methods

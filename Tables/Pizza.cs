@@ -16,6 +16,8 @@ namespace Pizzayolo.Tables
         public double price { get; set; }
 
         // Constructor
+        public Pizza() { }
+
         public Pizza(PizzaSize size, PizzaKind kind) {
             this.size = size;
             this.kind = kind;

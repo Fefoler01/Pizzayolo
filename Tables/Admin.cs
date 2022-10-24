@@ -21,12 +21,16 @@ namespace Pizzayolo.Model
         List<DeliveryMan> deliveryManList;
         List<Kitchen> kitchenList;
 
+        public Admin() { }
+
         public Admin(string firstName, string lastName) : base(firstName, lastName) {
             this.numberOrderDeliveryMan = new Dictionary<DeliveryMan, int>();
             this.numberOrderClerk = new Dictionary<Clerk, int>();
             this.orderList = new List<Order>();
             this.clientList = new List<Client>();
             this.clerkList = new List<Clerk>();
+            this.deliveryManList = new List<DeliveryMan>();
+            this.kitchenList = new List<Kitchen>();
         }
 
         public void AddClient(Client client) { // implementation of signal

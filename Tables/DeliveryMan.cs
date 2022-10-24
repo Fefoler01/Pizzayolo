@@ -17,6 +17,8 @@ namespace Pizzayolo.Tables
         public Order order{ get; set; }
 
         // Constructors
+        public DeliveryMan() { }
+
         public DeliveryMan(string firstName, string lastName) : base(firstName, lastName) { }
 
         // Methods
