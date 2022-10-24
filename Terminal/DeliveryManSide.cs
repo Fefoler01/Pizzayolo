@@ -24,6 +24,7 @@ namespace Pizzayolo.Terminal
             string surname = Console.ReadLine();
 
             DeliveryMan d = new DeliveryMan(name, surname);
+            d.SendSupervisionAddDeliveryMan();
 
             bool chose = true;
 
@@ -45,7 +46,7 @@ namespace Pizzayolo.Terminal
                         d.order.state = OrderStatus.Delivered;
                         await Task.Delay(timeToDeliver);
                         d.SendCommand();
-
+                        d.SendSupervisionNewOrderDeliveryMan();
                     });
                 };
 
@@ -57,7 +58,6 @@ namespace Pizzayolo.Terminal
                 Thread.Sleep(5000);
 
                 await Task.WhenAll(Delivers.ToArray());
-
 
             }
         }

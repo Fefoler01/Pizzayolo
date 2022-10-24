@@ -24,6 +24,7 @@ namespace Pizzayolo.Terminal
             string surname = Console.ReadLine();
 
             Kitchen kitchen = new Kitchen(name, surname);
+            kitchen.SendSupervisionAddKitchen();
 
             bool chose = true;
 
@@ -41,6 +42,7 @@ namespace Pizzayolo.Terminal
                         "\nThe Kitchen " + k.firstName + " " + k.lastName + " is sending the order to the delivery man\n");
                         await Task.Delay(timeCooking);
                         k.SendCommand();
+                        k.SendSupervisionNewOrderKitchen();
                     });
                 };
 

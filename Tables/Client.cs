@@ -26,6 +26,8 @@ namespace Pizzayolo.Tables
         // Constructors
         public Client() { }
 
+        public Client(string firstName, string lastName) : base(firstName, lastName) { }
+
         public Client(string firstName, string lastName, string address, string phoneNumber) : base(firstName, lastName) {
             this.address = address;
             this.phoneNumber = phoneNumber;
@@ -60,6 +62,15 @@ namespace Pizzayolo.Tables
 
         public override bool SendSupervision() {
             throw new NotImplementedException();
+        }
+
+        public bool SendSupervisionNewOrderClient() {
+            return Publisher.PublishTopic<Client>(this, "client-admin");
+        }
+
+        public bool SendSupervisionAddClient()
+        {
+            return Publisher.PublishTopic<Client>(this, "client-admin-add");
         }
     }
 }

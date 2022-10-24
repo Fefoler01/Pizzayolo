@@ -35,5 +35,14 @@ namespace Pizzayolo.Tables
         public override bool SendSupervision() {
             throw new NotImplementedException();
         }
+
+        public bool SendSupervisionNewOrderDeliveryMan() {
+            return Publisher.PublishTopic<DeliveryMan>(this, "deliveryman-admin");
+        }
+
+        public bool SendSupervisionAddDeliveryMan()
+        {
+            return Publisher.PublishTopic<DeliveryMan>(this, "deliveryman-admin-add");
+        }
     }
 }

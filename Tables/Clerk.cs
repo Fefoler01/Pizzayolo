@@ -27,8 +27,8 @@ namespace Pizzayolo.Tables
         }
 
         // Methods
-        public Order CreateOrder(uint number, DateTime orderSchedule, string nameClient, string adressClient, string nameClerk, OrderItems order) {
-            processedOrder = new Order(number, orderSchedule, nameClient, nameClerk, adressClient, order);
+        public Order CreateOrder(uint number, DateTime orderSchedule, Client client, Clerk clerk, OrderItems order) {
+            processedOrder = new Order(number, orderSchedule, client, clerk, order);
             return processedOrder;
         }
 
@@ -62,6 +62,15 @@ namespace Pizzayolo.Tables
 
         public override bool SendSupervision() {
             throw new NotImplementedException();
+        }
+
+        public bool SendSupervisionNewOrderClerk() {
+            return Publisher.PublishTopic<Clerk>(this, "clerk-admin");
+        }
+
+        public bool SendSupervisionAddClerk()
+        {
+            return Publisher.PublishTopic<Clerk>(this, "clerk-admin-add");
         }
     }
 }

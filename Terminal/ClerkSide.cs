@@ -25,6 +25,7 @@ namespace Pizzayolo.Terminal
             string surname = Console.ReadLine();
 
             Clerk clerk = new Clerk(name, surname);
+            clerk.SendSupervisionAddClerk();
 
             bool chose = true;
 
@@ -50,9 +51,8 @@ namespace Pizzayolo.Terminal
                         clerk.CreateOrder(
                             idOrder,
                             DateTime.Now,
-                            clientReceived.firstName,
-                            clientReceived.address,
-                            clerk.firstName,
+                            clientReceived,
+                            clerk,
                             clientReceived.orderItems
                         );
 
@@ -61,6 +61,7 @@ namespace Pizzayolo.Terminal
                         await Task.Delay(0);
 
                         clerk.SendCommand();
+                        clerk.SendSupervisionNewOrderClerk();
                     });
                 };
 

@@ -26,6 +26,7 @@ namespace Pizzayolo
                 "\n 2. Clerk" +
                 "\n 3. Kitchen" +
                 "\n 4. DeliveryMan" +
+                "\n 5. Admin" +
                 "\nTo quit tap 0.");
 
             bool stop = false;
@@ -54,6 +55,11 @@ namespace Pizzayolo
                     case "4":
                         Console.Title = "DeliveryMan";
                         await DeliveryManSide.ActivateDeliveryManSide();
+                        break;
+
+                    case "5":
+                        Console.Title = "Admin";
+                        await AdminSide.ActivateAdminSide();
                         break;
 
                     case "0":

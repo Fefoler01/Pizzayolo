@@ -29,6 +29,7 @@ namespace Pizzayolo.Terminal
             string phonenumber = Console.ReadLine();
 
             Client client = new Client(name, surname, address, phonenumber);
+            client.SendSupervisionAddClient();
 
             int choice;
             bool chose = true;
@@ -272,7 +273,8 @@ namespace Pizzayolo.Terminal
                     return Task.Run(async () =>
                     {
                         await Task.Delay(delayDelivery);
-                        Order orderReceived = Receiver.Receive<Order>("deliveryman-client");
+                        Order orderReceived = client.ReceiveCommand<Order>();
+                        orderReceived.SendSupervisionAddOrder();
                         Console.WriteLine("\nOrder received! Enjoy your meal, " + client.firstName + " " + client.lastName + "! " + orderReceived);
                     });
                 };
