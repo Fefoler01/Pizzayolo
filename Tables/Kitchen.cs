@@ -21,7 +21,14 @@ namespace Pizzayolo.Tables
 
         public Kitchen(string firstName, string lastName) : base(firstName, lastName) { }
 
+        public Kitchen(Kitchen other) : this(other.firstName, other.lastName) { }
+
         // Methods
+        public override string ToString()
+        {
+            return "Kitchen(firstName: " + firstName + ", lastName: " + lastName + ")";
+        }
+
         public override bool SendCommand() {
             return Publisher.Publish<Order>(orderGenerated, "kitchen-deliveryman");
         }

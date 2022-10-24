@@ -41,11 +41,14 @@ namespace Pizzayolo.Tables
 
         // Methods
         public override string ToString() {
-            return base.ToString()
+            return "Client("
+                + "\nFirst Name: " + firstName
+                + "\nLast Name: " + lastName
                 + "\nAddress: " + address
                 + "\nPhone Number: " + phoneNumber
                 + "\nDate First Order: " + dateFirstOrder.ToString()
-                + "\nOrder: " + orderItems.ToString();
+                + "\nOrder: " + orderItems.ToString()
+                + "\n)";
         }
 
         public override bool SendCommand() {

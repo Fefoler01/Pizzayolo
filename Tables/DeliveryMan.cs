@@ -21,7 +21,14 @@ namespace Pizzayolo.Tables
 
         public DeliveryMan(string firstName, string lastName) : base(firstName, lastName) { }
 
+        public DeliveryMan(DeliveryMan other) : this(other.firstName, other.lastName) { }
+
         // Methods
+        public override string ToString()
+        {
+            return "DeliveryMan(firstName: " + firstName + ", lastName: " + lastName + ")";
+        }
+
         public override bool SendCommand() {
             return Publisher.Publish<Order>(order, "deliveryman-client");
         }

@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
+using System.Net.Sockets;
 using Pizzayolo.MessageBroker.Consumer;
 using Pizzayolo.MessageBroker.Producer;
 using Pizzayolo.Tables;
@@ -46,7 +48,7 @@ namespace Pizzayolo.Model
             }
 
             client.dateFirstOrder = DateTime.Now;
-            clientList.Add(client);
+            clientList.Add(new Client(client));
             return;
         }
 
@@ -58,7 +60,7 @@ namespace Pizzayolo.Model
                 }
             }
 
-            clerkList.Add(clerk);
+            clerkList.Add(new Clerk(clerk));
             return;
         }
 
@@ -70,7 +72,7 @@ namespace Pizzayolo.Model
                 }
             }
 
-            deliveryManList.Add(deliveryMan);
+            deliveryManList.Add(new DeliveryMan(deliveryMan));
             return;
         }
 
@@ -82,7 +84,7 @@ namespace Pizzayolo.Model
                 }
             }
 
-            kitchenList.Add(kitchen);
+            kitchenList.Add(new Kitchen(kitchen));
             return;
         }
 
@@ -112,7 +114,12 @@ namespace Pizzayolo.Model
         public void ShowAllClient() {
             Console.WriteLine("--->");
             foreach (Client client in clientList) {
-                Console.WriteLine(client);
+                Console.WriteLine("Client("
+                + "\nFirst Name: " + client.firstName
+                + "\nLast Name: " + client.lastName
+                + "\nAddress: " + client.address
+                + "\nPhone Number: " + client.phoneNumber
+                + "\n)");
             }
             Console.WriteLine("<---");
         }

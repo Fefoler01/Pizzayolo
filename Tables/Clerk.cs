@@ -27,6 +27,8 @@ namespace Pizzayolo.Tables
             clients = new List<Client>();
         }
 
+        public Clerk(Clerk other) : this(other.firstName, other.lastName) { }
+
         // Methods
         public Order CreateOrder(uint number, DateTime orderSchedule, Client client, Clerk clerk, OrderItems order) {
             Order processedOrder = new Order(number, orderSchedule, client, clerk, order);
@@ -47,6 +49,11 @@ namespace Pizzayolo.Tables
             client.dateFirstOrder = DateTime.Now;
             clients.Add(client);
             return false;
+        }
+
+        public override string ToString()
+        {
+            return "Clerk(firstName: " + firstName + ", lastName: " + lastName + ")";
         }
 
         public override bool SendCommand() {
