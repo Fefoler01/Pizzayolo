@@ -14,7 +14,7 @@ namespace Pizzayolo.Tables
     public sealed class Kitchen : Individual
     {
         // Properties
-        public Order orderGenerated;
+        public Order orderGenerated { get; set; }
 
         // Constructors
         public Kitchen() { }

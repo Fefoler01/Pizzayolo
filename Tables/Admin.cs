@@ -11,23 +11,23 @@ namespace Pizzayolo.Model
     public class Admin : Individual
     {
 
-        Dictionary<DeliveryMan, int> numberOrderDeliveryMan;
-        Dictionary<Clerk, int> numberOrderClerk;
-        Dictionary<Client, int> numberOrderClient;
-        Dictionary<Kitchen, int> numberOrderKitchen;
-        List<Order> orderList;
-        List<Client> clientList;
-        List<Clerk> clerkList;
-        List<DeliveryMan> deliveryManList;
-        List<Kitchen> kitchenList;
+        Dictionary<String, int> numberOrderDeliveryMan { get; set; }
+        Dictionary<String, int> numberOrderClerk { get; set; }
+        Dictionary<String, int> numberOrderClient { get; set; }
+        Dictionary<String, int> numberOrderKitchen { get; set; }
+        List<Order> orderList { get; set; }
+        List<Client> clientList { get; set; }
+        List<Clerk> clerkList { get; set; }
+        List<DeliveryMan> deliveryManList { get; set; }
+        List<Kitchen> kitchenList { get; set; }
 
         public Admin() { }
 
         public Admin(string firstName, string lastName) : base(firstName, lastName) {
-            this.numberOrderDeliveryMan = new Dictionary<DeliveryMan, int>();
-            this.numberOrderClerk = new Dictionary<Clerk, int>();
-            this.numberOrderClient = new Dictionary<Client, int>();
-            this.numberOrderKitchen = new Dictionary<Kitchen, int>();
+            this.numberOrderDeliveryMan = new Dictionary<String, int>();
+            this.numberOrderClerk = new Dictionary<String, int>();
+            this.numberOrderClient = new Dictionary<String, int>();
+            this.numberOrderKitchen = new Dictionary<String, int>();
             this.orderList = new List<Order>();
             this.clientList = new List<Client>();
             this.clerkList = new List<Clerk>();
@@ -219,21 +219,21 @@ namespace Pizzayolo.Model
 
 
         public void NewOrderDeliveryMan(DeliveryMan d) { // implementation of signal
-            numberOrderDeliveryMan[d] = numberOrderDeliveryMan[d] + 1;
+            numberOrderDeliveryMan[d.firstName+d.lastName] += 1;
         }
 
         public void NewOrderClerk(Clerk c) { // implementation of signal
-            numberOrderClerk[c] = numberOrderClerk[c] + 1;
+            numberOrderClerk[c.firstName + c.lastName] += 1;
         }
 
         public void NewOrderClient(Client c)
         { // implementation of signal
-            numberOrderClient[c] = numberOrderClient[c] + 1;
+            numberOrderClient[c.firstName + c.lastName + c.address + c.phoneNumber + c.dateFirstOrder] += 1;
         }
 
         public void NewOrderKitchen(Kitchen k)
         { // implementation of signal
-            numberOrderKitchen[k] = numberOrderKitchen[k] + 1;
+            numberOrderKitchen[k.firstName + k.lastName] += 1;
         }
 
         // Signal

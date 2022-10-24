@@ -17,7 +17,6 @@ namespace Pizzayolo.Tables
     public sealed class Clerk : Individual
     {
         // Properties
-        public Order processedOrder;
 
         public List<Client> clients;
 
@@ -30,7 +29,7 @@ namespace Pizzayolo.Tables
 
         // Methods
         public Order CreateOrder(uint number, DateTime orderSchedule, Client client, Clerk clerk, OrderItems order) {
-            processedOrder = new Order(number, orderSchedule, client, clerk, order);
+            Order processedOrder = new Order(number, orderSchedule, client, clerk, order);
             return processedOrder;
         }
 
@@ -51,11 +50,16 @@ namespace Pizzayolo.Tables
         }
 
         public override bool SendCommand() {
-            return Publisher.Publish<Order>(processedOrder, "clerk-kitchen");
+            return Publisher.Publish<Order>(new Order(), "clerk-kitchen");
         }
 
         public override Client ReceiveCommand<Client>() {
             return  Receiver.Receive<Client>("client-clerk");
+        }
+
+        public bool SendCommand(Order order)
+        {
+            return Publisher.Publish<Order>(order, "clerk-kitchen");
         }
 
         public override T ReceiveSupervision<T>() {

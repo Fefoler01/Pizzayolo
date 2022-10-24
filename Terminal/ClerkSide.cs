@@ -10,6 +10,7 @@ using Pizzayolo.MessageBroker.Consumer;
 using Pizzayolo.MessageBroker.Producer;
 using System.Collections.Generic;
 using static System.Net.Mime.MediaTypeNames;
+using Apache.NMS.ActiveMQ.Commands;
 
 namespace Pizzayolo.Terminal
 {
@@ -48,7 +49,7 @@ namespace Pizzayolo.Terminal
                         );
 
 
-                        clerk.CreateOrder(
+                        Order order = clerk.CreateOrder(
                             idOrder,
                             DateTime.Now,
                             clientReceived,
@@ -56,11 +57,13 @@ namespace Pizzayolo.Terminal
                             clientReceived.orderItems
                         );
 
-                        Console.WriteLine("\nThe Clerk " + clerk.firstName + " " + clerk.lastName + " is preparing the order : " + clerk.processedOrder);
+                        Console.WriteLine("\nThe Clerk " + clerk.firstName + " " + clerk.lastName + " is preparing the order : " + order);
+
+                        Console.WriteLine(JsonConvert.SerializeObject(order));
 
                         await Task.Delay(0);
 
-                        clerk.SendCommand();
+                        clerk.SendCommand(order);
                         clerk.SendSupervisionNewOrderClerk();
                     });
                 };
@@ -70,6 +73,7 @@ namespace Pizzayolo.Terminal
                     ClerksReceive(clerk,1),
                     ClerksReceive(clerk,2)
                 };
+
 
                 Task.WaitAll(ManageTwoClientClerk.ToArray());
 
