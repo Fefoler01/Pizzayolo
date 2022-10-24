@@ -33,6 +33,7 @@ namespace Pizzayolo.Model
             this.kitchenList = new List<Kitchen>();
         }
 
+        // Add
         public void AddClient(Client client) { // implementation of signal
 
             foreach (Client savedclient in clientList) {
@@ -106,36 +107,6 @@ namespace Pizzayolo.Model
             });
         }
 
-        public double GetTotalPriceOrder(Client client)
-        {
-            double totalPrice = 0;
-            foreach (Order savedorder in orderList)
-            {
-                Client savedclient = savedorder.client;
-                if (savedclient.firstName == client.firstName && savedclient.lastName == client.lastName)
-                {
-                    totalPrice += savedorder.items.totalPrice();
-                }
-            }
-            return totalPrice;
-        }
-
-        public void ShowTotalPriceOrder(Client client)
-        {
-            Console.WriteLine("\nThe client " + client.firstName + " " + client.lastName + " paid a total of " + GetTotalPriceOrder(client) + " € to the pizzeria.");
-        }
-
-        public void ShowAveragePriceOrder()
-        {
-            double totalPrice = 0;
-            foreach (Client client in clientList)
-            {
-                totalPrice += GetTotalPriceOrder(client);
-            }
-            totalPrice /= clientList.Count;
-            Console.WriteLine("\nThe average cumulate paid by clients is " + totalPrice + " €.");
-        }
-
         //Clerk
         public void SortClerkByName() {
             this.clerkList.Sort(delegate (Clerk x, Clerk y) {
@@ -149,7 +120,40 @@ namespace Pizzayolo.Model
             });
         }
 
-        public double GetTotalPriceOrder(Clerk clerk) {
+        // Stats
+        public double GetTotalPriceOrder(Client client) { // return how many a client paid
+            double totalPrice = 0;
+            foreach (Order savedorder in orderList)
+            {
+                Client savedclient = savedorder.client;
+                if (savedclient.firstName == client.firstName && savedclient.lastName == client.lastName)
+                {
+                    totalPrice += savedorder.items.totalPrice();
+                }
+            }
+            return totalPrice;
+        }
+
+        public void ShowTotalPriceOrder(Client client) { // show how many a client paid
+            Console.WriteLine("\nThe client " + client.firstName + " " + client.lastName + " paid a total of " + GetTotalPriceOrder(client) + " € to the pizzeria.");
+        }
+
+        public void ShowAveragePriceOrder() { // the average paid by a client
+            if (clientList.Count != 0) {
+                double totalPrice = 0;
+                foreach (Client client in clientList) {
+                    totalPrice += GetTotalPriceOrder(client);
+                }
+                Console.WriteLine("\nThe total paid by clients is " + totalPrice + " €.");
+                totalPrice /= clientList.Count;
+                Console.WriteLine("The average cumulate paid by client is " + totalPrice + " €.");
+            }
+            else {
+                Console.WriteLine("\nThere is no clients.");
+            }
+        }
+
+        public double GetTotalPriceOrder(Clerk clerk) { // return how many a clerk sold
             double totalPrice = 0;
             foreach (Order savedorder in orderList) {
                 Clerk savedclerk = savedorder.clerk;
@@ -160,43 +164,41 @@ namespace Pizzayolo.Model
             return totalPrice;
         }
 
-        public void ShowTotalPriceOrder(Clerk clerk) {
+        public void ShowTotalPriceOrder(Clerk clerk) { // show how many a clerk sold
             Console.WriteLine("\nThe clerk " + clerk.firstName + " " + clerk.lastName + " sold a total of " + GetTotalPriceOrder(clerk) + " € for the pizzeria.");
         }
 
-
-
-        public void ShowOrderListDate(DateTime start, DateTime end)
-        {
-            if (start <= end)
-            {
+        public void ShowOrderListDate(DateTime start, DateTime end) { // orders between two dates
+            if (start <= end) {
                 int nbOrderDate = 0;
-                foreach (Order order in orderList)
-                {
-                    if (order.orderSchedule >= start && order.orderSchedule <= end)
-                    {
+                foreach (Order order in orderList) {
+                    if (order.orderSchedule >= start && order.orderSchedule <= end) {
                         nbOrderDate++;
                         order.ToString();
                     }
                 }
                 Console.WriteLine("\nWe find " + nbOrderDate + " order between " + start + " and " + end);
             }
-            else
-            {
+            else {
                 Console.WriteLine("\nDate error, first date must be before or the same as the second date.");
             }
         }
 
-        public void ShowMoyPriceOrder()
-        {
-            double totalPrice = 0;
-            foreach (Order order in orderList)
-            {
-                totalPrice += order.items.totalPrice();
+        public void ShowMoyPriceOrder() { // the average price of an order
+            if (orderList.Count != 0) {
+                double totalPrice = 0;
+                foreach (Order order in orderList) {
+                    totalPrice += order.items.totalPrice();
+                }
+                Console.WriteLine("\nThe total price of orders is " + totalPrice + " €.");
+                totalPrice /= orderList.Count;
+                Console.WriteLine("The average price of an order is " + totalPrice + " €.");
             }
-            totalPrice /= orderList.Count;
-            Console.WriteLine("\nThe average price of an order is " + totalPrice + " €.");
+            else {
+                Console.WriteLine("\n There is no orders.");
+            }
         }
+
 
         public void NewOrderDeliveryMan(DeliveryMan d) { // implementation of signal
             numberOrderDeliveryMan[d] = numberOrderDeliveryMan[d] + 1;

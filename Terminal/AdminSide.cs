@@ -148,6 +148,7 @@ namespace Pizzayolo.Terminal
                 bool keepAlive = true;
                 bool invalid = true;
                 string choseNext;
+                bool choiceSort;
 
                 while (keepAlive)
                 {
@@ -170,12 +171,76 @@ namespace Pizzayolo.Terminal
                                 return;
 
                             case "1":
-                                //;
+                                choiceSort = true;
+                                Console.WriteLine("\nWhat sort of client do you want to do ?" +
+                                    "\n 1. By name" +
+                                    "\n 2. By address" +
+                                    "\n 3. By total price" +
+                                    "\nTo quit tap 0.");
+                                while (choiceSort) {
+                                    choseNext = Console.ReadLine();
+                                    switch (choseNext) {
+                                        case "0":
+                                            choiceSort = false;
+                                            break;
+
+                                        case "1":
+                                            admin.SortClientByName();
+                                            choiceSort = false;
+                                            break;
+
+                                        case "2":
+                                            admin.SortClientByAddress();
+                                            choiceSort = false;
+                                            break;
+
+                                        case "3":
+                                            admin.SortClientByTotalPrice();
+                                            choiceSort = false;
+                                            break;
+
+                                        default:
+                                            Console.WriteLine("\nRetry.");
+                                            choiceSort = true;
+                                            break;
+                                    }
+                                }
+
                                 invalid = false;
                                 break;
 
                             case "2":
-                                //;
+                                choiceSort = true;
+                                Console.WriteLine("\nWhat sort of clerk do you want to do ?" +
+                                    "\n 1. By name" +
+                                    "\n 2. By total price" +
+                                    "\nTo quit tap 0.");
+                                while (choiceSort)
+                                {
+                                    choseNext = Console.ReadLine();
+                                    switch (choseNext)
+                                    {
+                                        case "0":
+                                            choiceSort = false;
+                                            break;
+
+                                        case "1":
+                                            admin.SortClerkByName();
+                                            choiceSort = false;
+                                            break;
+
+                                        case "2":
+                                            admin.SortClerkByTotalPrice();
+                                            choiceSort = false;
+                                            break;
+
+                                        default:
+                                            Console.WriteLine("\nRetry.");
+                                            choiceSort = true;
+                                            break;
+                                    }
+                                }
+
                                 invalid = false;
                                 break;
 
@@ -197,6 +262,18 @@ namespace Pizzayolo.Terminal
                                 Console.WriteLine("Choose the end date (dd-MM-yyyy) :");
                                 DateTime end = DateTime.ParseExact(Console.ReadLine(), "dd-MM-yyyy", null);
                                 admin.ShowOrderListDate(start, end);
+
+                                invalid = false;
+                                break;
+
+                            case "5":
+                                admin.ShowMoyPriceOrder();
+
+                                invalid = false;
+                                break;
+
+                            case "6":
+                                admin.ShowAveragePriceOrder();
 
                                 invalid = false;
                                 break;
