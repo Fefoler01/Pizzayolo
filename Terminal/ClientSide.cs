@@ -120,7 +120,7 @@ namespace Pizzayolo.Terminal
 
                     while (stop)
                     {
-                        Console.WriteLine("\nSelect your pizza type :");
+                        Console.WriteLine("\nSelect another pizza type :");
                         foreach (PizzaKind pizzakind in PizzaKind.GetValues(typeof(PizzaKind)))
                         {
                             Console.WriteLine((int)pizzakind + 1 + ". " + pizzakind);
@@ -308,6 +308,7 @@ namespace Pizzayolo.Terminal
                         Console.WriteLine("Quit.");
                         orderAgain = false;
                         chose = false;
+                        System.Environment.Exit(0);
                         return;
                     }
                     else if (choseNext == "U" || choseNext == "u")
