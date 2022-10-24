@@ -59,8 +59,6 @@ namespace Pizzayolo.Terminal
 
                         Console.WriteLine("\nThe Clerk " + clerk.firstName + " " + clerk.lastName + " is preparing the order : " + order);
 
-                        Console.WriteLine(JsonConvert.SerializeObject(order));
-
                         await Task.Delay(0);
 
                         clerk.SendCommand(order);
