@@ -107,6 +107,14 @@ namespace Pizzayolo.Model
             });
         }
 
+        public void ShowAllClient() {
+            Console.WriteLine("--->");
+            foreach (Client client in clientList) {
+                Console.WriteLine(client);
+            }
+            Console.WriteLine("<---");
+        }
+
         //Clerk
         public void SortClerkByName() {
             this.clerkList.Sort(delegate (Clerk x, Clerk y) {
@@ -118,6 +126,14 @@ namespace Pizzayolo.Model
             this.clerkList.Sort(delegate (Clerk x, Clerk y) {
                 return GetTotalPriceOrder(x).CompareTo(GetTotalPriceOrder(y));
             });
+        }
+
+        public void ShowAllClerk() {
+            Console.WriteLine("--->");
+            foreach(Clerk clerk in clerkList) {
+                Console.WriteLine(clerk);
+            }
+            Console.WriteLine("<---");
         }
 
         // Stats

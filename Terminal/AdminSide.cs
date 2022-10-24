@@ -186,16 +186,19 @@ namespace Pizzayolo.Terminal
 
                                         case "1":
                                             admin.SortClientByName();
+                                            admin.ShowAllClient();
                                             choiceSort = false;
                                             break;
 
                                         case "2":
                                             admin.SortClientByAddress();
+                                            admin.ShowAllClient();
                                             choiceSort = false;
                                             break;
 
                                         case "3":
                                             admin.SortClientByTotalPrice();
+                                            admin.ShowAllClient();
                                             choiceSort = false;
                                             break;
 
@@ -226,11 +229,13 @@ namespace Pizzayolo.Terminal
 
                                         case "1":
                                             admin.SortClerkByName();
+                                            admin.ShowAllClerk();
                                             choiceSort = false;
                                             break;
 
                                         case "2":
                                             admin.SortClerkByTotalPrice();
+                                            admin.ShowAllClerk();
                                             choiceSort = false;
                                             break;
 
