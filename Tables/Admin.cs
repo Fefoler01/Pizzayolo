@@ -26,6 +26,8 @@ namespace Pizzayolo.Model
         public Admin(string firstName, string lastName) : base(firstName, lastName) {
             this.numberOrderDeliveryMan = new Dictionary<DeliveryMan, int>();
             this.numberOrderClerk = new Dictionary<Clerk, int>();
+            this.numberOrderClient = new Dictionary<Client, int>();
+            this.numberOrderKitchen = new Dictionary<Kitchen, int>();
             this.orderList = new List<Order>();
             this.clientList = new List<Client>();
             this.clerkList = new List<Clerk>();
